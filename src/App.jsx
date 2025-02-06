@@ -124,7 +124,7 @@ function ProjectCard({ project, onClose }) {
             <span>Code</span>
           </a>
           <a
-            href={project.liveUrl}
+            href={project.liveUrl + project.videoId}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-2 text-zinc-400 hover:text-emerald-400 transition-colors"
