@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Mail, LinkedinIcon, Code2, Sparkles, BookOpen, MessageCircle, X } from 'lucide-react';
-import { Tweet } from 'react-tweet'
+import React, { useState } from 'react';
+import { Github, ExternalLink, Mail, Code2, Sparkles, BookOpen, MessageCircle, X } from 'lucide-react';
+import { Tweet } from 'react-tweet';
 
 const skills = [
   { name: 'Frontend Development', icon: Code2, description: 'React, Next.js, TypeScript' },
@@ -93,40 +92,20 @@ const projects = [
   }
 ];
 
-function TabButton({ active, onClick, children }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`px-4 py-2 rounded-lg transition-colors ${
-        active 
-          ? 'bg-emerald-500/20 text-emerald-400' 
-          : 'text-zinc-400 hover:text-emerald-400'
-      }`}
-    >
-      {children}
-    </button>
-  );
-}
-
-function ProjectCard({ project, onClose }) {
+const ProjectCard = ({ project, onClose }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      className="relative bg-zinc-900/80 rounded-xl overflow-hidden border border-zinc-800/50 backdrop-blur-sm h-full flex-shrink-0"
-    >
+    <div className="group bg-white/5 rounded-2xl overflow-hidden backdrop-blur-sm border border-white/10">
       <button
-        onClick={onClose}
+        onClick={() => setShowVideo(false)}
         className="absolute top-4 right-4 p-2 bg-black/50 rounded-full z-10 text-zinc-400 hover:text-white"
       >
-        <X size={16} />
+        <X className="w-6 h-6" />
       </button>
       
-      <div className="relative aspect-video flex-shrink-0">
+      <div className="relative aspect-video">
         {!showVideo ? (
           <>
             <img 
@@ -137,7 +116,7 @@ function ProjectCard({ project, onClose }) {
             {project.videoId && 
               <button
                 onClick={() => setShowVideo(true)}
-                className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 hover:opacity-100 transition-opacity"
+                className="absolute inset-0 flex items-center justify-center bg-black/50 transition-opacity"
               >
                 <span className="p-4 rounded-full bg-emerald-500/20 text-emerald-400">
                   Play Demo
@@ -178,216 +157,255 @@ function ProjectCard({ project, onClose }) {
         </div>
 
         <div className="flex space-x-4">
-          {/* GitHub Link */}
-          <a 
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-zinc-400 hover:text-emerald-400 transition-colors"
-          >
-            <Github size={20} />
-            <span>Code</span>
-          </a>
-
-          {/* Live Demo Link (conditionally rendered) */}
-          {project.liveUrl && (
+          {project.githubUrl && (
             <a 
-              href={project.liveUrl + project.videoId}
+              href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-2 text-zinc-400 hover:text-emerald-400 transition-colors"
             >
-              <ExternalLink size={20} />
+              <Github className="w-5 h-5" />
+              <span>Code</span>
+            </a>
+          )}
+
+          {project.liveUrl && (
+            <a 
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-2 text-zinc-400 hover:text-emerald-400 transition-colors"
+            >
+              <ExternalLink className="w-5 h-5" />
               <span>Live Demo</span>
             </a>
           )}
         </div>
       </div>
-
-    </motion.div>
-  );
-}
-
-const ProfilePicture = () => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      className="mb-8"
-    >
-      <div className="relative w-32 h-32">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full animate-spin-slow opacity-70 blur-md" />
-        <div className="absolute inset-[3px] bg-zinc-900 rounded-full" />
-        <img
-          src="https://avatars.githubusercontent.com/u/59007034?s=400&u=cae28a1f224021f4d52f402f3f0a6b579a94be3d&v=4"
-          alt="pic"
-          className="absolute inset-[3px] rounded-full object-cover"
-        />
-      </div>
-    </motion.div>
-  );
-};
-
-
-const tweets = [
-  "1887213512755441763",
-  "1887592892325314862",
-  "1886832039036641746", // Replace with actual tweet IDs
-  "1886394555257528350",
-  "1880858695049121884",
-  "1879602542658851159"
-];
-
-const TwitterEmbed = ({ tweetId }) => {
-  return (
-    <div className="w-full bg-black/30 rounded-lg border border-zinc-800/50 p-4">
-      <Tweet id={tweetId} />
     </div>
   );
 };
 
+
 function App() {
   const [activeTab, setActiveTab] = useState('about');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [hoveredSkill, setHoveredSkill] = useState(null);
+
+  const tweets = [
+    "1887213512755441763",
+    "1887592892325314862",
+    "1886832039036641746",
+    "1886394555257528350",
+    "1880858695049121884",
+    "1879602542658851159"
+  ];
 
   return (
-    <div className="h-screen bg-black text-white p-8 flex">
-      {/* Left Column - Always Visible */}
-      <div className="w-1/3 pr-8 flex flex-col justify-between">
-        <div>
-          <ProfilePicture />  {/* Add the component here */}
-          <motion.h1 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-4xl font-bold mb-4 bg-gradient-to-r from-emerald-400 to-blue-500 text-transparent bg-clip-text"
-          >
-            Building the future of web3
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-zinc-400 text-lg mb-8"
-          >
-            Full-stack blockchain developer crafting decentralized experiences
-          </motion.p>
-
-          <div className="flex space-x-4 mb-8">
-            {[
-              { Icon: Github, href: 'https://github.com/frikinomad' },
-              { Icon: Mail, href: 'mailto:rishichaturvedi0012@gmail.com' }
-            ].map(({ Icon, href }) => (
-              <motion.a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 rounded-full bg-zinc-800/50 hover:bg-emerald-500/20 transition-colors"
-              >
-                <Icon className="w-5 h-5 text-zinc-400 hover:text-emerald-400" />
-              </motion.a>
-            ))}
-          </div>
-
-          <div className="flex flex-col space-y-2">
-            {['About', 'Skills', 'Projects', 'Posts'].map((tab) => (
-              <TabButton
-                key={tab}
-                active={activeTab === tab.toLowerCase()}
-                onClick={() => setActiveTab(tab.toLowerCase())}
-              >
-                {tab}
-              </TabButton>
-            ))}
-          </div>
-        </div>
-
-        <p className="text-zinc-500 text-sm">© {new Date().getFullYear()} • Built with ❤️</p>
+    <div className="min-h-screen bg-[#030014] text-white overflow-x-hidden">
+      {/* Animated Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTMyNDJjIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-10" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/30 rounded-full blur-[128px] animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/30 rounded-full blur-[128px] animate-pulse delay-1000" />
       </div>
 
-      {/* Right Column - Dynamic Content */}
-      <div className="w-2/3 relative">
-        <AnimatePresence mode="wait">
-          {selectedProject ? (
-            <ProjectCard 
-              key="project"
-              project={selectedProject} 
-              onClose={() => setSelectedProject(null)} 
+      {/* Main Content */}
+      <div className="relative container mx-auto px-4 py-12">
+        {/* Header */}
+        <header className="flex flex-col items-center mb-16 relative">
+          <div className="relative w-32 h-32 mb-8">
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full animate-[spin_8s_linear_infinite] opacity-70 blur-sm" />
+            <img
+              src="https://avatars.githubusercontent.com/u/59007034?s=400&u=cae28a1f224021f4d52f402f3f0a6b579a94be3d&v=4"
+              alt="Profile"
+              className="absolute inset-[2px] rounded-full object-cover border-2 border-black"
             />
-          ) : (
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="h-full bg-zinc-900/50 rounded-xl border border-zinc-800/50 backdrop-blur-sm p-6 overflow-auto"
+          </div>
+          <h1 className="text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+            @frikinomad
+          </h1>
+          <br />
+          <div className="flex gap-4">
+            <a
+              href="https://github.com/frikinomad"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-full bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 transition-all duration-300"
             >
-              {activeTab === 'about' && (
-                <div className="space-y-4">
-                  <h2 className="text-2xl font-bold text-emerald-400">About Me</h2>
-                  <p className="text-zinc-400">
-                  Software Development Engineer at Dell Technologies by day, blockchain enthusiast by passion. I architect enterprise solutions while building the future of Web3, particularly in the Solana ecosystem.
-                  I believe in a future of "Networked States" - where different blockchain networks seamlessly communicate and exchange value. This vision drives my projects, from developing a novel NFT rental platform and custom Solana wallet extension to building decentralized exchanges and network monitoring tools.
-                  <br />
-                  <br />
-                  My journey spans both worlds - deploying enterprise-scale microservices and CI/CD pipelines at Dell, while crafting Web3 solutions that make blockchain technology more accessible. Whether it's implementing AI-powered automation or creating user-friendly blockchain applications, I'm passionate about bridging traditional technology with decentralized innovation.
-                  When I'm not coding, you'll find me exploring new protocols or thinking about how to make complex blockchain concepts more approachable.
-                  </p>
-                </div>
-              )}
+              <Github className="w-6 h-6" />
+            </a>
+            <a
+              href="mailto:rishichaturvedi0012@gmail.com"
+              className="p-3 rounded-full bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 transition-all duration-300"
+            >
+              <Mail className="w-6 h-6" />
+            </a>
+            <a
+              href="https://x.com/frikinomad"
+              className="p-3 rounded-full bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 transition-all duration-300"
+            >
+              <X className="w-6 h-6" />
+            </a>
+          </div>
+        </header>
 
-              {activeTab === 'skills' && (
-                <div className="grid grid-cols-2 gap-4">
-                  {skills.map((skill) => (
-                    <div key={skill.name} className="p-4 bg-black/30 rounded-lg border border-zinc-800/50">
-                      <div className="mb-3 p-2 rounded-lg bg-emerald-500/10 w-fit">
-                        <skill.icon className="w-5 h-5 text-emerald-400" />
-                      </div>
-                      <h3 className="font-semibold text-white mb-1">{skill.name}</h3>
-                      <p className="text-sm text-zinc-400">{skill.description}</p>
+        {/* Navigation */}
+        <nav className="flex justify-center mb-16">
+          <div className="flex gap-2 p-1 bg-white/5 rounded-full backdrop-blur-sm">
+            {['About', 'Skills', 'Projects', 'Posts'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab.toLowerCase())}
+                className={`px-6 py-2 rounded-full transition-all duration-300 ${
+                  activeTab === tab.toLowerCase()
+                    ? 'bg-gradient-to-r from-emerald-500 to-blue-500 text-white'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </nav>
+
+        {/* Content Sections */}
+        <div className="max-w-6xl mx-auto">
+          {activeTab === 'about' && (
+            <div className="bg-white/5 rounded-2xl p-8 backdrop-blur-sm border border-white/10">
+              <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-500">
+                About Me
+              </h2>
+              <div className="text-zinc-300 space-y-4 leading-relaxed">
+                <p>
+                  I started my journey as an intern at Dell working on Spring Boot microservices and .NET applications. Now, as an SDE 2, I've spent the past few years building enterprise solutions - from developing microservices and implementing CI/CD pipelines to creating AI-powered automation systems. Recently, I've been leading the migration of our streaming services from Scala to Java.
+                </p>
+                <p>
+                  Beyond my day job, I'm deeply involved in blockchain development, particularly in the Solana ecosystem. I've built several projects including a custom wallet extension, an NFT rental platform using Blinks for automation, and a decentralized exchange. One of my proudest achievements was winning the DSCVR Buildathon with a Canvas app that mints NFTs based on user engagement. I also created Workivo, a job application tracker that helps keep the job search organized with custom boards and dynamic deadline tracking.
+                </p>
+                <p>
+                  My experience ranges from enterprise Java development to Web3 innovations, and I enjoy building tools that make complex technology more accessible to everyone. You can often find me experimenting with new protocols or working on projects that bridge traditional tech with blockchain solutions.
+                </p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>Spring/Summer 2022: Software Development Intern - Spring Boot Microservices</li>
+                  <li>Spring 2023: Software Development Intern - .NET and CI/CD</li>
+                  <li>2023 - Jan 2025: SDE 1 at Dell - Java Microservices, Unit Testing, KTLO</li>
+                  <li>Current: SDE 2 at Dell - Leading Scala to Java Migration</li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'skills' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {skills.map((skill) => (
+                <div
+                  key={skill.name}
+                  className="group relative bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 hover:border-emerald-500/50 transition-all duration-300"
+                  onMouseEnter={() => setHoveredSkill(skill.name)}
+                  onMouseLeave={() => setHoveredSkill(null)}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-emerald-500/20 to-blue-500/20 text-emerald-400">
+                      <skill.icon className="w-6 h-6" />
                     </div>
-                  ))}
-                </div>
-              )}
-
-              {activeTab === 'projects' && (
-                <div className="grid grid-cols-2 gap-4">
-                  {projects.map((project) => (
-                    <div
-                      key={project.id}
-                      onClick={() => setSelectedProject(project)}
-                      className="group cursor-pointer bg-black/30 rounded-lg border border-zinc-800/50 overflow-hidden hover:border-emerald-500/50 transition-colors"
-                    >
-                      <img 
-                        src={project.image} 
-                        alt={project.title}
-                        className="w-full h-32 object-cover"
-                      />
-                      <div className="p-4">
-                        <h3 className="font-semibold text-white mb-1">{project.title}</h3>
-                        <p className="text-sm text-zinc-400">{project.description}</p>
-                      </div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
+                      <p className="text-zinc-400">{skill.description}</p>
                     </div>
-                  ))}
+                  </div>
+                  <div className={`absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
                 </div>
-              )}
+              ))}
+            </div>
+          )}
 
-            {activeTab === 'posts' && (
-              <div className="flex flex-col space-y-4">
-                {tweets.map((tweetId) => (
-                  <TwitterEmbed key={tweetId} tweetId={tweetId} />
+
+          {activeTab === 'projects' && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {projects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onClose={() => setSelectedProject(null)}
+                  />
                 ))}
               </div>
             )}
 
-            </motion.div>
+          {activeTab === 'posts' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {tweets.map((tweetId) => (
+                <div
+                  key={tweetId}
+                  className="bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10"
+                >
+                  <Tweet id={tweetId} />
+                </div>
+              ))}
+            </div>
           )}
-        </AnimatePresence>
+        </div>
       </div>
+
+      {/* Project Modal */}
+      {selectedProject && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#030014] rounded-2xl border border-white/10 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 flex justify-end p-4">
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="p-6">
+              <h2 className="text-2xl font-bold mb-4">{selectedProject.title}</h2>
+              <p className="text-zinc-400 mb-6">{selectedProject.description}</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {selectedProject.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 text-sm bg-emerald-500/10 text-emerald-400 rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-4">
+                {selectedProject.githubUrl && (
+                  <a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 transition-all duration-300"
+                  >
+                    <Github className="w-5 h-5" />
+                    <span>View Code</span>
+                  </a>
+                )}
+                {selectedProject.liveUrl && (
+                  <a
+                    href={selectedProject.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 transition-all duration-300"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    <span>Live Demo</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Footer */}
+      <footer className="text-center py-8 text-zinc-500 text-sm">
+        © {new Date().getFullYear()} • Built with ❤️
+      </footer>
     </div>
   );
 }
