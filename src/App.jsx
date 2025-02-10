@@ -297,28 +297,38 @@ function App() {
           )}
 
           {activeTab === 'skills' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {skills.map((skill) => (
-                <div
-                  key={skill.name}
-                  className="group relative bg-white/5 rounded-2xl p-6 backdrop-blur-sm border border-white/10 hover:border-emerald-500/50 transition-all duration-300"
-                  onMouseEnter={() => setHoveredSkill(skill.name)}
-                  onMouseLeave={() => setHoveredSkill(null)}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-emerald-500/20 to-blue-500/20 text-emerald-400">
-                      <skill.icon className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
-                      <p className="text-zinc-400">{skill.description}</p>
-                    </div>
+            <div className="flex flex-wrap gap-3">
+              {[
+                'React',
+                'Next.js',
+                'JavaScript',
+                'TypeScript',
+                'Node.js',
+                'Express',
+                'Anchor',
+                'Metaplex',
+                'Solana',
+                'Solana Web3.js',
+                'Solana Wallet Adapter',
+                'Java',
+                'Spring Boot',
+                'Spring Security',
+                'Firebase',
+                'Firestore',
+                'Firebase Auth',
+                'Firebase Storage',
+              ]
+                .map((skill) => (
+                  <div
+                    key={skill}
+                    className="group relative bg-white/5 rounded-xl px-4 py-2 text-sm font-medium text-white border border-white/10 hover:border-emerald-500/50 transition-all duration-300"
+                  >
+                    {skill}
                   </div>
-                  <div className={`absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
-                </div>
-              ))}
+                ))}
             </div>
           )}
+
 
 
           {activeTab === 'projects' && (
