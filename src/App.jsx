@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ExternalLink, Mail, LinkedinIcon, Code2, Sparkles, BookOpen, MessageCircle, X } from 'lucide-react';
+import { Tweet } from 'react-tweet'
 
 const skills = [
   { name: 'Frontend Development', icon: Code2, description: 'React, Next.js, TypeScript' },
@@ -54,7 +55,7 @@ const projects = [
       id: 4,
       title: 'Solana Blink Actions - SOL Donate',
       description: 'Developed a Solana Action using Next.js and TypeScript, integrated with an `actions.json` specification, enabling users to donate SOL directly from their wallets to others. The Action is compatible with any environment supporting Solana Actions, offering a seamless transaction experience through QR codes, widgets, or embedded links. Designed for optimal portability, the feature enhances user interaction by enabling blockchain transactions without requiring navigation to external apps or webpages. Users can experience this by visiting dial.to and adding the Action link: https://mynextblink.vercel.app/.',
-      image: '/blink_actions.png',
+      image: '/alice_donate_sol.png',
       tech: ['Next.js', 'TypeScript', 'Solana Actions'],
       liveUrl: 'https://mynextblink.vercel.app/',
       githubUrl: 'https://github.com/frikinomad/mynextblink',
@@ -84,7 +85,7 @@ const projects = [
       id: 7,
       title: 'Workivo - Job Tracking SaaS',
       description: 'A comprehensive job application tracking platform that allows users to create different boards for tracking various job types (Wishlist, Product-based, Frontend AI). The platform features customizable stages with unique fields for each stage: Applied stage includes resume version and application date, Initial Screening has screening date and POC, Interview stage tracks interview date, type, meeting link, and interviewer, Offer stage includes offer amount, benefits, and decision deadline, and Rejected stage captures rejection reasons. Common fields include Job Title, Company, Job Posting Link, Location, Salary Range, and Notes. The application dynamically changes deadline colors based on urgency and allows users to customize application colors for better organization.',
-      image: '/workivo.png',
+      image: '/ivo.png',
       tech: ['Next.js', 'React', 'Redux', 'Firebase'],
       liveUrl: 'https://workivo-gyms.vercel.app/',
       githubUrl: 'https://github.com/frikinomad/workivo',
@@ -228,6 +229,24 @@ const ProfilePicture = () => {
   );
 };
 
+
+const tweets = [
+  "1887213512755441763",
+  "1887592892325314862",
+  "1886832039036641746", // Replace with actual tweet IDs
+  "1886394555257528350",
+  "1880858695049121884",
+  "1879602542658851159"
+];
+
+const TwitterEmbed = ({ tweetId }) => {
+  return (
+    <div className="w-full bg-black/30 rounded-lg border border-zinc-800/50 p-4">
+      <Tweet id={tweetId} />
+    </div>
+  );
+};
+
 function App() {
   const [activeTab, setActiveTab] = useState('about');
   const [selectedProject, setSelectedProject] = useState(null);
@@ -275,7 +294,7 @@ function App() {
           </div>
 
           <div className="flex flex-col space-y-2">
-            {['About', 'Skills', 'Projects'].map((tab) => (
+            {['About', 'Skills', 'Projects', 'Posts'].map((tab) => (
               <TabButton
                 key={tab}
                 active={activeTab === tab.toLowerCase()}
@@ -356,6 +375,14 @@ function App() {
                   ))}
                 </div>
               )}
+
+            {activeTab === 'posts' && (
+              <div className="flex flex-col space-y-4">
+                {tweets.map((tweetId) => (
+                  <TwitterEmbed key={tweetId} tweetId={tweetId} />
+                ))}
+              </div>
+            )}
 
             </motion.div>
           )}
