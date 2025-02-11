@@ -193,6 +193,7 @@ function App() {
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
   const tweets = [
+    "1889388179352068162",
     "1889279095776919881",
     "1888926214485848124",
     "1887213512755441763",
