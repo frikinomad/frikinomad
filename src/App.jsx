@@ -2,18 +2,12 @@ import React, { useState } from 'react';
 import { Github, ExternalLink, Mail, Code2, Sparkles, BookOpen, MessageCircle, X } from 'lucide-react';
 import { Tweet } from 'react-tweet';
 
-const skills = [
-  { name: 'Frontend Development', icon: Code2, description: 'React, Next.js, TypeScript' },
-  { name: 'Solana Programs', icon: Sparkles, description: 'Anchor Lang, Rust' },
-  { name: 'Technical Writing', icon: BookOpen, description: 'Documentation, Tutorials' },
-  { name: 'Community Building', icon: MessageCircle, description: 'Discord, Twitter Posts' }
-];
 
 const projects = [
   {
     id: 1,
     title: 'Solana Wallet',
-    description: 'Custom Solana Web3 Wallet with Chrome Extension',
+    description: 'I developed a Chrome extension wallet for Solana that allows users to create or import wallets, transfer SOL to other accounts, and provides a confirmation screen for added security. The extension also enables seamless connectivity to decentralized applications (DApps), allowing users to sign and execute transactions via injected methods directly from the wallet. Built with React and TypeScript, this wallet offers a user-friendly, secure, and efficient way to manage Solana assets and interact with the Solana ecosystem.  To use this extension, you can download the dist folder from Github link, go to chrome://extensions, enable Developer Mode, and import the extension directly.',
     image: '/solana_wallet.png',
     tech: ['React', 'TypeScript', 'Web3.js', 'Solana'],
     liveUrl: null,
@@ -21,23 +15,13 @@ const projects = [
     videoId: 'ov7iko978hM'
   },
   {
-    id: 1,
-    title: 'Solserv - NFT Rental Platform',
-    description: 'I have built a novel NFT rental platform on Solana that leverages the power of Blinks to create a seamless, trustless rental experience. The platform features a custom-developed Solana program that manages the entire rental lifecycle through three core instructions: create listing, rent, and end rental. Through smart contract, the platform handles secure escrow management for both NFTs and rental payments, ensuring a safe transaction environment for all parties.',
-    image: '/solserv.png',
-    tech: ['Solana', 'Blockchain', 'Blinks', 'Smart Contracts'],
-    liveUrl: '',
-    githubUrl: '',
-    videoId: ''
-  },
-  {
       id: 2,
-      title: 'Solana DEX',
-      description: 'I have developed a fully functional decentralized exchange (DEX) on the Solana blockchain that implements automated market maker (AMM) functionality. Built using Solana\'s token program, the DEX enables users to initialize liquidity pools, execute token swaps, and perform withdrawals, with prices automatically adjusted through AMM algorithms based on pool dynamics. The smart contract handles complex token mathematics and pool state management, while a React-based frontend provides an intuitive interface for users to interact with the protocol.',
+      title: 'SOON DEX',
+      description: 'I have developed a fully functional decentralized exchange (DEX) on the SOON blockchain that implements automated market maker (AMM) functionality. Built using Solana\'s token program, the DEX enables users to initialize liquidity pools, execute token swaps, and perform withdrawals, with prices automatically adjusted through AMM algorithms based on pool dynamics. The smart contract handles complex token mathematics and pool state management, while a React-based frontend provides an intuitive interface for users to interact with the protocol.',
       image: '/solana_dex.png',
       tech: ['Solana', 'React', 'AMM', 'Token Swaps'],
-      liveUrl: '',
-      githubUrl: '',
+      liveUrl: 'https://soon-dex-frikinomads-projects.vercel.app/',
+      githubUrl: 'https://github.com/frikinomad/soon-dex',
       videoId: null
   },
   {
@@ -63,7 +47,7 @@ const projects = [
   {
       id: 5,
       title: 'DSCVR NFT Canvas Reactions',
-      description: 'Developed a Canvas that enables users to mint Metaplex Core NFTs on the Solana blockchain based on post reactions. Inspired by milestone rewards like YouTube\'s play buttons, this tool rewards users for their engagement: Silver NFT for reaching a specific reaction threshold, and Gold NFT for surpassing a higher reaction threshold. The project integrates DSCVR SDK to fetch user interaction data, with minting powered by Metaplex Core NFTs on the Solana blockchain. Wallet connectivity is implemented using Solana Wallet Adapter. Awarded as a winner of the DSCVR Buildathon for innovation and functionality, demonstrating technical expertise in Web3 integration and decentralized app development.',
+      description: 'Developed a Canvas that enables users to mint Metaplex Core NFTs on the Solana blockchain based on post reactions. Inspired by milestone rewards like YouTube\'s play buttons, this tool rewards users for their engagement: Silver NFT for reaching a specific reaction threshold, and Gold NFT for surpassing a higher reaction threshold. The project integrates DSCVR SDK to fetch user interaction data, with minting powered by Metaplex Core NFTs on the Solana blockchain. Wallet connectivity is implemented using Solana Wallet Adapter. Awarded as a winner of the DSCVR Buildathon for innovation and functionality, demonstrating technical expertise in Web3 integration and decentralized app development. NOTE: for this to work it will work on DSCVR platform since needs DSCVR SDK integration',
       image: '/dscvr_nft.png',
       tech: ['Next.js', 'React', 'Solana', 'Metaplex Core'],
       liveUrl: 'https://nftcanvasreactions.vercel.app/',
@@ -89,7 +73,17 @@ const projects = [
       liveUrl: 'https://workivo-gyms.vercel.app/',
       githubUrl: 'https://github.com/frikinomad/workivo',
       videoId: ''
-  }
+  },
+  {
+    id: 1,
+    title: 'Solserv - NFT Rental Platform',
+    description: 'I have built a novel NFT rental platform on Solana that leverages the power of Blinks to create a seamless, trustless rental experience. The platform features a custom-developed Solana program that manages the entire rental lifecycle through three core instructions: create listing, rent, and end rental. Through smart contract, the platform handles secure escrow management for both NFTs and rental payments, ensuring a safe transaction environment for all parties.',
+    image: '/solserv.png',
+    tech: ['Solana', 'Next.js', 'Blinks', 'Anchor Program'],
+    liveUrl: '',
+    githubUrl: '',
+    videoId: ''
+  },
 ];
 
 const ProjectCard = ({ project, onClose }) => {
@@ -311,6 +305,7 @@ function App() {
                 'Anchor',
                 'Metaplex',
                 'Solana',
+                'Solana Program',
                 'Solana Web3.js',
                 'Solana Wallet Adapter',
                 'Java',
