@@ -15,6 +15,26 @@ const projects = [
     videoId: 'ov7iko978hM'
   },
   {
+    id: 1,
+    title: 'Solserv - NFT Rental Platform',
+    description: "The problem is that renting or accessing digital and physical assets today requires jumping between multiple platforms, creating separate accounts, and dealing with complex processes. The solution is to build a universal rental system that works directly through social media - imagine seeing a streamer's rare game outfit and being able to rent it instantly with just a tweet, or reading an article preview and accessing the full content with a single click, all without leaving your preferred platform or creating new accounts. This system would make any digital or physical asset easily rentable through simple social interactions, turning the entire internet into a seamless marketplace.",
+    image: '/solserv.png',
+    tech: ['Solana', 'Next.js', 'Blinks', 'Anchor Program'],
+    liveUrl: 'https://solserv.vercel.app/',
+    githubUrl: '',
+    videoId: '-0YgI58rVBA'
+  },
+  {
+    id: 7,
+    title: 'Workivo - Job Tracking SaaS',
+    description: 'A comprehensive job application tracking platform that allows users to create different boards for tracking various job types (Wishlist, Product-based, Frontend AI). The platform features customizable stages with unique fields for each stage: Applied stage includes resume version and application date, Initial Screening has screening date and POC, Interview stage tracks interview date, type, meeting link, and interviewer, Offer stage includes offer amount, benefits, and decision deadline, and Rejected stage captures rejection reasons. Common fields include Job Title, Company, Job Posting Link, Location, Salary Range, and Notes. The application dynamically changes deadline colors based on urgency and allows users to customize application colors for better organization.',
+    image: '/ivo.png',
+    tech: ['Next.js', 'React', 'Redux', 'Firebase'],
+    liveUrl: 'https://workivo-gyms.vercel.app/',
+    githubUrl: 'https://github.com/frikinomad/workivo',
+    videoId: ''
+  },
+  {
       id: 2,
       title: 'SOON DEX',
       description: 'I have developed a fully functional decentralized exchange (DEX) on the SOON blockchain that implements automated market maker (AMM) functionality. Built using Solana\'s token program, the DEX enables users to initialize liquidity pools, execute token swaps, and perform withdrawals, with prices automatically adjusted through AMM algorithms based on pool dynamics. The smart contract handles complex token mathematics and pool state management, while a React-based frontend provides an intuitive interface for users to interact with the protocol.',
@@ -63,26 +83,6 @@ const projects = [
       liveUrl: 'https://sol-data-dashboard-vdl5.vercel.app/',
       githubUrl: 'https://github.com/frikinomad/sol_data_dashboard',
       videoId: ''
-  },
-  {
-      id: 7,
-      title: 'Workivo - Job Tracking SaaS',
-      description: 'A comprehensive job application tracking platform that allows users to create different boards for tracking various job types (Wishlist, Product-based, Frontend AI). The platform features customizable stages with unique fields for each stage: Applied stage includes resume version and application date, Initial Screening has screening date and POC, Interview stage tracks interview date, type, meeting link, and interviewer, Offer stage includes offer amount, benefits, and decision deadline, and Rejected stage captures rejection reasons. Common fields include Job Title, Company, Job Posting Link, Location, Salary Range, and Notes. The application dynamically changes deadline colors based on urgency and allows users to customize application colors for better organization.',
-      image: '/ivo.png',
-      tech: ['Next.js', 'React', 'Redux', 'Firebase'],
-      liveUrl: 'https://workivo-gyms.vercel.app/',
-      githubUrl: 'https://github.com/frikinomad/workivo',
-      videoId: ''
-  },
-  {
-    id: 1,
-    title: 'Solserv - NFT Rental Platform',
-    description: 'I have built a novel NFT rental platform on Solana that leverages the power of Blinks to create a seamless, trustless rental experience. The platform features a custom-developed Solana program that manages the entire rental lifecycle through three core instructions: create listing, rent, and end rental. Through smart contract, the platform handles secure escrow management for both NFTs and rental payments, ensuring a safe transaction environment for all parties.',
-    image: '/solserv.png',
-    tech: ['Solana', 'Next.js', 'Blinks', 'Anchor Program'],
-    liveUrl: '',
-    githubUrl: '',
-    videoId: ''
   },
 ];
 
