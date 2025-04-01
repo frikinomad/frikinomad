@@ -16,6 +16,16 @@ const projects = [
   },
   {
     id: 1,
+    title: 'Superteam earn Extension',
+    description: 'Chrome Extension with Google OAuth to save Superteam earn bounties & sync them with the google calendar',
+    image: '/solana_wallet.png',
+    tech: ['React', 'TypeScript', 'Web3.js', 'Solana'],
+    liveUrl: null,
+    githubUrl: 'https://github.com/frikinomad/superteam-ext',
+    videoId: 'TM4Ua2v03lI'
+  },
+  {
+    id: 1,
     title: 'Solserv - NFT Rental Platform',
     description: "The problem is that renting or accessing digital and physical assets today requires jumping between multiple platforms, creating separate accounts, and dealing with complex processes. The solution is to build a universal rental system that works directly through social media - imagine seeing a streamer's rare game outfit and being able to rent it instantly with just a tweet, or reading an article preview and accessing the full content with a single click, all without leaving your preferred platform or creating new accounts. This system would make any digital or physical asset easily rentable through simple social interactions, turning the entire internet into a seamless marketplace.",
     image: '/solserv.png',
