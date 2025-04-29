@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Github, ExternalLink, Mail, Code2, Sparkles, BookOpen, MessageCircle, X } from 'lucide-react';
+import { Github, ExternalLink, Mail, Code2, Sparkles, BookOpen, MessageCircle, X, FileText } from 'lucide-react';
 import { Tweet } from 'react-tweet';
 
 
@@ -208,6 +208,8 @@ function App() {
     "1879602542658851159"
   ];
 
+  const resume_drive_link = "https://drive.google.com/file/d/1-Lj21pnT7gh52kGypTRJ2mUbKSsE1y-Z/view?usp=sharing"
+
   return (
     <div className="min-h-screen bg-[#030014] text-white overflow-x-hidden">
       {/* Animated Background */}
@@ -254,13 +256,20 @@ function App() {
             >
               <X className="w-6 h-6" />
             </a>
+            <a
+              href={resume_drive_link}
+              title="Resume"
+              className="p-3 rounded-full bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 transition-all duration-300"
+            >
+              <FileText className="w-6 h-6" />
+            </a>
           </div>
         </header>
 
         {/* Navigation */}
         <nav className="flex justify-center mb-16">
           <div className="flex gap-2 p-1 bg-white/5 rounded-full backdrop-blur-sm">
-            {['About', 'Skills', 'Projects', 'Posts'].map((tab) => (
+            {['About', 'Skills', 'Projects', 'Posts', 'Resume'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab.toLowerCase())}
@@ -337,8 +346,6 @@ function App() {
             </div>
           )}
 
-
-
           {activeTab === 'projects' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {projects.map((project) => (
@@ -363,6 +370,24 @@ function App() {
               ))}
             </div>
           )}
+
+          {activeTab === 'resume' && (
+            <div className="flex flex-col items-center justify-center text-center p-6 space-y-4">
+              <div className="text-4xl">Hello There 👋</div>
+              <a
+                href={resume_drive_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition"
+              >
+                View My Resume
+              </a>
+              <p className="text-white/80 max-w-xl">
+                Reach out to me if that is something you are looking for.
+              </p>
+            </div>
+          )}
+
         </div>
       </div>
 
