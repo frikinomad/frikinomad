@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import { Github, ExternalLink, Mail, Code2, Sparkles, BookOpen, MessageCircle, X, FileText } from 'lucide-react';
+import { Github, ExternalLink, Mail, X, FileText } from 'lucide-react';
 import { Tweet } from 'react-tweet';
 
 
