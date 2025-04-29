@@ -268,22 +268,24 @@ function App() {
 
         {/* Navigation */}
         <nav className="flex justify-center mb-16">
-          <div className="flex gap-2 p-1 bg-white/5 rounded-full backdrop-blur-sm">
-            {['About', 'Skills', 'Projects', 'Posts', 'Resume'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab.toLowerCase())}
-                className={`px-6 py-2 rounded-full transition-all duration-300 ${
-                  activeTab === tab.toLowerCase()
-                    ? 'bg-gradient-to-r from-emerald-500 to-blue-500 text-white'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
+          <div className="overflow-x-auto whitespace-nowrap px-2">
+            <div className="flex gap-2 p-1 bg-white/5 rounded-full backdrop-blur-sm w-max">
+              {['About', 'Skills', 'Projects', 'Posts', 'Resume'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab.toLowerCase())}
+                  className={`px-6 py-2 rounded-full transition-all duration-300 ${
+                    activeTab === tab.toLowerCase()
+                      ? 'bg-gradient-to-r from-emerald-500 to-blue-500 text-white'
+                      : 'text-zinc-400 hover:text-white'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
           </div>
-        </nav>
+        </nav>  
 
         {/* Content Sections */}
         <div className="max-w-6xl mx-auto">
