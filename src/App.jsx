@@ -292,7 +292,7 @@ const Posts = () => {
 };
 
 const Resume = () => {
-  const resume_drive_link = "https://drive.google.com/file/d/1-Lj21pnT7gh52kGypTRJ2mUbKSsE1y-Z/view?usp=sharing";
+  const resume_drive_link = "https://drive.google.com/file/d/1IF-nkLWnb01WTvju6A2CiXhcc_FBbMum/view?usp=sharing";
   
   return (
     <div className="flex flex-col items-center justify-center text-center p-6 space-y-4">
